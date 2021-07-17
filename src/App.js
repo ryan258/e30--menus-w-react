@@ -1,14 +1,37 @@
+import React, { useState } from 'react'
 import './App.css'
-import { range } from 'd3'
-import { Face } from './components/Face'
 
-const width = 166
-const height = 166
+const Dropdown = ({ options, id, onSelectedValueChange }) => (
+  <select name="pets" id={id} onChange={(event) => onSelectedValueChange(event.target.value)}>
+    {/* <option value="">--Please choose an option--</option> */}
+    {options.map(({ value, label }) => (
+      <option id={value} value={value} key={value}>
+        {label}
+      </option>
+    ))}
+  </select>
+)
 
-// console.log(arc)
-// const array = [1, 2, 3, 4, 5, 6]
-const array = range(20)
+const options = [
+  { value: 'dog', label: 'dog' },
+  { value: 'cat', label: 'cat' },
+  { value: 'hamster', label: 'hamster' },
+  { value: 'parrot', label: 'parrot' },
+  { value: 'spider', label: 'spider' },
+  { value: 'goldfish', label: 'goldfish' }
+]
 
-const App = () => <></>
+const App = () => {
+  // state is a good way to keep track of the selected option
+  const [selectedValue, setSelectedValue] = useState()
+  console.log(selectedValue)
+
+  return (
+    <div>
+      <label htmlFor="pet-select">Choose a pet:</label>
+      <Dropdown options={options} id="pet-select" onSelectedValueChange={setSelectedValue} />
+    </div>
+  )
+}
 
 export default App
